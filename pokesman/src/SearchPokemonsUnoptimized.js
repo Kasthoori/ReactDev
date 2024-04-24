@@ -1,12 +1,13 @@
 import { Input } from "@material-ui/core";
 import React, { useState } from "react";
+import PokemonsCard from "./PokemonsCard";
 
 
 
 
 const SearchPokemonsUnoptimized = () => {
 
-    const [text, setText] = useState("Text");
+    const [text, setText] = useState("");
 
     const onChange = (e) =>{
         setText(e.target.value);
@@ -15,6 +16,7 @@ const SearchPokemonsUnoptimized = () => {
     return(
         <>
             <Input onChange={onChange} value={text} />
+            <PokemonsCard searchQuery={text} />
         </>
     )
 

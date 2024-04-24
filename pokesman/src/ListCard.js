@@ -15,10 +15,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import SearchAgainIcon from '@material-ui/icons/YoutubeSearchedFor';
 import Card from '@material-ui/core/Card';
-import { makeStyle } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import { isEmpty, isNil } from "lodash";
 
-const useStyle = makeStyle({
+const useStyle = makeStyles({
     card: {
         marginTop: 20,
         padding: 10,
@@ -130,13 +130,14 @@ const ListCard = ({ data, icon }) =>{
         component = (
             <List>
                 {data.map((d) => {
-                    <ListRow
+                   return (<ListRow
                         key={d.key}
                         name={d.name}
                         description={d.description}
                         fullDescription={d.fullDescription}
                         icon={icon}
                     />
+                   )
                 })}
             </List>
         );
