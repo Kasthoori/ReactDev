@@ -77,3 +77,77 @@ const ListRow = ({name, description, fullDescription, icon}) => {
 
 };
 
+const Centered = ({ children }) =>{
+
+    return (
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            className={useStyle().centered}
+        >
+            {children}
+        </Box>
+    )
+};
+
+const EmptyState = () =>{
+
+    const classes = useStyle();
+
+    return (
+        <Centered>
+            <SearchAgainIcon className={classes.SearchAgainIcon} />
+            <Typography variant="h6">No Matches found</Typography>
+        </Centered>
+    );
+
+};
+
+const LoadingState = () =>{
+    return (
+        <Centered>
+            <CircularProgress />
+        </Centered>
+    );
+};
+
+const ListCard = ({ data, icon }) =>{
+    const classes = useStyle();
+
+    let component;
+
+    if(isNil(data)) {
+
+        component = <LoadingState />;
+
+    } else if (isEmpty(data)) {
+
+        component = <EmptyState />;
+
+    } else {
+
+        component = (
+            <List>
+                {data.map((d) => {
+                    <ListRow
+                        key={d.key}
+                        name={d.name}
+                        description={d.description}
+                        fullDescription={d.fullDescription}
+                        icon={icon}
+                    />
+                })}
+            </List>
+        );
+    }
+
+    return (
+        <Card raised className={classes.card}>
+            {component}
+        </Card>
+    );
+
+}
+
+export default ListCard;
